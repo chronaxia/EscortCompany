@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.miaxis.escortcompany.R;
 import com.miaxis.escortcompany.model.entity.Company;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -27,7 +28,11 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.MyViewHo
     private OnItemClickListener mOnItemClickListener;
 
     public CompanyAdapter(Context context, List<Company> dataList) {
-        this.dataList = dataList;
+        this.dataList = new ArrayList<>();
+        this.dataList.addAll(dataList);
+        if (this.dataList.size() != 0) {
+            this.dataList.remove(0);
+        }
         layoutInflater = LayoutInflater.from(context);
     }
 

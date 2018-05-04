@@ -36,8 +36,6 @@ import io.reactivex.functions.Consumer;
 
 public class EscortFragment extends BaseFragment implements EscortContract.View{
 
-    @BindView(R.id.tv_test)
-    TextView tvTest;
     @BindView(R.id.srl_escort)
     SwipeRefreshLayout srlEscort;
     @BindView(R.id.smrv_escort)
@@ -122,7 +120,11 @@ public class EscortFragment extends BaseFragment implements EscortContract.View{
         srlEscort.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                presenter.downEscort(selcectCompany);
+                if (selcectCompany != null) {
+                    presenter.downEscort(selcectCompany);
+                } else {
+                    srlEscort.setRefreshing(false);
+                }
             }
         });
     }

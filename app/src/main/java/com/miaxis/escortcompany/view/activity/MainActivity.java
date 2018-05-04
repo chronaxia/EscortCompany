@@ -56,6 +56,8 @@ public class MainActivity extends BaseActivity implements EscortFragment.OnFragm
     private MaterialDialog materialDialog;
     private CompanyAdapter companyAdapter;
     private Company selcectCompany;
+    private List<Company> companyList;
+    private String baseCompanyName = "";
 
     public static final String[] TITLES = {"员工管理", "车辆管理", "系统设置"};
 
@@ -82,7 +84,8 @@ public class MainActivity extends BaseActivity implements EscortFragment.OnFragm
         systemFragment = SystemFragment.newInstance();
         fragmentList.add(systemFragment);
         adapter = new MainFragmentAdapter(getSupportFragmentManager(), fragmentList);
-        companyAdapter = new CompanyAdapter(this, EscortCompanyApp.getInstance().getDaoSession().getCompanyDao().loadAll());
+        companyList = EscortCompanyApp.getInstance().getDaoSession().getCompanyDao().loadAll();
+        companyAdapter = new CompanyAdapter(this, companyList);
     }
 
     @Override
@@ -117,11 +120,13 @@ public class MainActivity extends BaseActivity implements EscortFragment.OnFragm
             @Override
             public void onItemClick(View view, int position) {
                 selcectCompany = companyAdapter.getDataList().get(position);
-                tvCompanySelect.setText(selcectCompany.getCompname());
+                tvCompanySelect.setText(baseCompanyName + " ➧ " + selcectCompany.getCompname());
                 escortFragment.downEscort(selcectCompany);
                 materialDialog.dismiss();
             }
         });
+        baseCompanyName = companyList.get(0).getCompname();
+        tvCompanySelect.setText(baseCompanyName);
     }
 
     private void initTabLayout() {
@@ -144,11 +149,13 @@ public class MainActivity extends BaseActivity implements EscortFragment.OnFragm
                 }
                 int position = tab.getPosition();
                 toolbar.setVisibility(View.VISIBLE);
+                tvCompanySelect.setVisibility(View.VISIBLE);
                 tab.setIcon(pressedIconList.get(position));
                 toolbar.setTitle(TITLES[position]);
                 tab.setText(TITLES[position]);
                 if (position == 2) {
                     toolbar.setVisibility(View.GONE);
+                    tvCompanySelect.setVisibility(View.GONE);
                 }
             }
 

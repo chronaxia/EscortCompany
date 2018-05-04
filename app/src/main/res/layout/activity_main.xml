@@ -19,14 +19,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <TextView
-        android:id="@+id/tv_company_select"
-        android:text="选择机构"
-        app:layout_anchor="@id/app_bar_layout"
-        app:layout_anchorGravity="bottom"
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
-
     <include layout="@layout/content_main_plate" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,117 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@drawable/background"
+            android:scaleType="matrix"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:background="#00ffffff">
+
+            <View
+                android:layout_width="70px"
+                android:layout_height="match_parent"
+                />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:src="@mipmap/ic_launcher_round"
+                app:civ_border_width="3dp"
+                app:civ_border_color="#FFFFFFFF"/>
+
+            <TextView
+                android:hint="检察员姓名"
+                android:id="@+id/tv_username_name"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <View
+        android:background="@color/lightgray"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+
+    <LinearLayout
+        android:id="@+id/ll_update"
+        android:orientation="horizontal"
+        style="@style/l_personal_item">
+
+        <ImageView
+            android:src="@mipmap/opsearch"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitCenter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            style="@style/tv_personal_item"
+            android:text="更新"/>
+
+        <ImageView
+            android:src="@mipmap/zicon_arrow"
+            android:layout_gravity="end|center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <View
+        android:background="@color/lightgray"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+
+    <LinearLayout
+        android:id="@+id/ll_about"
+        android:orientation="horizontal"
+        style="@style/l_personal_item">
+
+        <ImageView
+            android:src="@mipmap/opsearch"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitCenter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            style="@style/tv_personal_item"
+            android:text="关于"/>
+
+        <ImageView
+            android:src="@mipmap/zicon_arrow"
+            android:layout_gravity="end|center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <View
+        android:background="@color/lightgray"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+
+</LinearLayout>

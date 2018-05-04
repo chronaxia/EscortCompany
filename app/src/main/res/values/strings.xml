@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">EscortCompany</string>
+    <string name="version">浙江中正智能有限公司  版本号：</string>
+    <string name="login">登录</string>
+    <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="help_dialog_text">
+        <i>公司: 浙江中正智能科技有限公司</i>	    \n
+	    \n
+		<i>联系：service@miaxis.com</i>	    \n
+	    \n
+		<b>智能押运终端</b>	    \n
+	    \n
+		<b>有任何建议或者反馈可以随时联系官方客服</b></string>
+</resources>

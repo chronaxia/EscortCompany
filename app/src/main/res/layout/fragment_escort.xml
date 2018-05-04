@@ -1,0 +1,31 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_test"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:text="@string/hello_blank_fragment" />
+
+    <View
+        android:background="@color/lightgray"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_escort"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView
+            android:id="@+id/smrv_escort"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+                />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>

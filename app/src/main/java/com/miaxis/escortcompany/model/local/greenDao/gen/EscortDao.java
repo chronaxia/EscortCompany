@@ -34,7 +34,7 @@ public class EscortDao extends AbstractDao<Escort, String> {
         public final static Property Comno = new Property(7, String.class, "comno", false, "COMNO");
         public final static Property Compname = new Property(8, String.class, "compname", false, "COMPNAME");
         public final static Property Phoneno = new Property(9, String.class, "phoneno", false, "PHONENO");
-        public final static Property Photo = new Property(10, byte[].class, "photo", false, "PHOTO");
+        public final static Property PhotoUrl = new Property(10, String.class, "photoUrl", false, "PHOTO_URL");
         public final static Property Opuser = new Property(11, String.class, "opuser", false, "OPUSER");
         public final static Property Opdate = new Property(12, String.class, "opdate", false, "OPDATE");
         public final static Property Remark = new Property(13, String.class, "remark", false, "REMARK");
@@ -67,7 +67,7 @@ public class EscortDao extends AbstractDao<Escort, String> {
                 "\"COMNO\" TEXT," + // 7: comno
                 "\"COMPNAME\" TEXT," + // 8: compname
                 "\"PHONENO\" TEXT," + // 9: phoneno
-                "\"PHOTO\" BLOB," + // 10: photo
+                "\"PHOTO_URL\" TEXT," + // 10: photoUrl
                 "\"OPUSER\" TEXT," + // 11: opuser
                 "\"OPDATE\" TEXT," + // 12: opdate
                 "\"REMARK\" TEXT," + // 13: remark
@@ -137,9 +137,9 @@ public class EscortDao extends AbstractDao<Escort, String> {
             stmt.bindString(10, phoneno);
         }
  
-        byte[] photo = entity.getPhoto();
-        if (photo != null) {
-            stmt.bindBlob(11, photo);
+        String photoUrl = entity.getPhotoUrl();
+        if (photoUrl != null) {
+            stmt.bindString(11, photoUrl);
         }
  
         String opuser = entity.getOpuser();
@@ -232,9 +232,9 @@ public class EscortDao extends AbstractDao<Escort, String> {
             stmt.bindString(10, phoneno);
         }
  
-        byte[] photo = entity.getPhoto();
-        if (photo != null) {
-            stmt.bindBlob(11, photo);
+        String photoUrl = entity.getPhotoUrl();
+        if (photoUrl != null) {
+            stmt.bindString(11, photoUrl);
         }
  
         String opuser = entity.getOpuser();
@@ -291,7 +291,7 @@ public class EscortDao extends AbstractDao<Escort, String> {
             cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // comno
             cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // compname
             cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // phoneno
-            cursor.isNull(offset + 10) ? null : cursor.getBlob(offset + 10), // photo
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // photoUrl
             cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // opuser
             cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // opdate
             cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // remark
@@ -315,7 +315,7 @@ public class EscortDao extends AbstractDao<Escort, String> {
         entity.setComno(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
         entity.setCompname(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
         entity.setPhoneno(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
-        entity.setPhoto(cursor.isNull(offset + 10) ? null : cursor.getBlob(offset + 10));
+        entity.setPhotoUrl(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
         entity.setOpuser(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
         entity.setOpdate(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
         entity.setRemark(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));

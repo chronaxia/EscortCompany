@@ -108,7 +108,7 @@ public class EscortFragment extends BaseFragment implements EscortContract.View{
                 int adapterPosition = menuBridge.getAdapterPosition(); // RecyclerView的Item的position。
                 int menuPosition = menuBridge.getPosition(); // 菜单在RecyclerView的Item中的Position。
                 if (menuPosition == 0) {
-                    Toasty.info(EscortCompanyApp.getInstance().getApplicationContext(), "点击删除", 0, true).show();
+                    presenter.deleteEscort(escortAdapter.getDataList().get(adapterPosition));
                 } else if (menuPosition == 1) {
                     Toasty.info(EscortCompanyApp.getInstance().getApplicationContext(), "点击修改", 0, true).show();
                 }
@@ -161,6 +161,20 @@ public class EscortFragment extends BaseFragment implements EscortContract.View{
     public void downEscort(Company company) {
         selcectCompany = company;
         presenter.downEscort(company);
+    }
+
+    public void addEscort() {
+    }
+
+    @Override
+    public void deleteEscortSuccess() {
+        presenter.loadEscort(selcectCompany);
+        Toasty.success(EscortCompanyApp.getInstance().getApplicationContext(), "删除成功", 0, true).show();
+    }
+
+    @Override
+    public void deleteEscortFailed(String message) {
+        Toasty.info(EscortCompanyApp.getInstance().getApplicationContext(), "删除操作失败", 0, true).show();
     }
 
     @Override

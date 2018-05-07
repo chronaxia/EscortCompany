@@ -18,4 +18,13 @@ public class CarModel {
         return EscortCompanyApp.getInstance().getDaoSession().getCarDao().queryBuilder()
                 .where(CarDao.Properties.Compid.eq(company.getId())).list();
     }
+
+    public void saveCar(List<Car> carList) {
+        EscortCompanyApp.getInstance().getDaoSession().getCarDao().deleteAll();
+        EscortCompanyApp.getInstance().getDaoSession().getCarDao().insertInTx(carList);
+    }
+
+    public void deleteCar(Car car) {
+        EscortCompanyApp.getInstance().getDaoSession().getCarDao().delete(car);
+    }
 }

@@ -2,6 +2,7 @@ package com.miaxis.escortcompany.app;
 
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.StrictMode;
 
 import com.miaxis.escortcompany.model.local.GreenDaoContext;
 import com.miaxis.escortcompany.model.local.greenDao.gen.DaoMaster;
@@ -29,6 +30,10 @@ public class EscortCompanyApp extends Application {
         super.onCreate();
         escortApp = this;
         map = new HashMap<>();
+        // android 7.0系统解决拍照的问题
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+        builder.detectFileUriExposure();
     }
 
     public static EscortCompanyApp getInstance() {

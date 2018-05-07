@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import com.miaxis.escortcompany.app.EscortCompanyApp;
 import com.miaxis.escortcompany.model.LoginModel;
 import com.miaxis.escortcompany.model.entity.Company;
 import com.miaxis.escortcompany.model.entity.Config;
@@ -102,13 +103,8 @@ public class LoginPresenter extends BaseActivityPresenter implements LoginContra
 
     @Override
     public void login(final String username, final String password) {
-        Observable.create(new ObservableOnSubscribe<Config>() {
-            @Override
-            public void subscribe(ObservableEmitter<Config> e) throws Exception {
-                Config config = model.loadConfig();
-                e.onNext(config);
-            }
-        })
+        final Config config = model.loadConfig();
+        Observable.just(config)
                 .subscribeOn(Schedulers.io())
                 .compose(getProvider().<Config>bindToLifecycle())
                 .observeOn(Schedulers.io())
@@ -140,6 +136,8 @@ public class LoginPresenter extends BaseActivityPresenter implements LoginContra
                     @Override
                     public void accept(ResponseEntity<Company> companyResponseEntity) throws Exception {
                         if (view != null) {
+                            config.setUsername(username);
+                            EscortCompanyApp.getInstance().put(StaticVariable.CONFIG, config);
                             view.loginSuccess();
                         }
                     }

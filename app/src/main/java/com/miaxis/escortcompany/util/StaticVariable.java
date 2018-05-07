@@ -5,6 +5,9 @@ import android.content.pm.PackageManager;
 
 import com.miaxis.escortcompany.app.EscortCompanyApp;
 
+import java.net.FileNameMap;
+import java.net.URLConnection;
+
 /**
  * Created by 一非 on 2018/4/17.
  */
@@ -83,6 +86,15 @@ public class StaticVariable {
             e.printStackTrace();
             return "";
         }
+    }
+
+    public static String getMimeType(String fileUrl)
+            throws java.io.IOException
+    {
+        FileNameMap fileNameMap = URLConnection.getFileNameMap();
+        String type = fileNameMap.getContentTypeFor(fileUrl);
+
+        return type;
     }
 
 }

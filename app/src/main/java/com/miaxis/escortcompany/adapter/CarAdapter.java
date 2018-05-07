@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.miaxis.escortcompany.R;
-import com.miaxis.escortcompany.model.entity.Company;
+import com.miaxis.escortcompany.model.entity.Car;
 import com.miaxis.escortcompany.model.entity.Escort;
 
 import java.util.List;
@@ -19,40 +19,40 @@ import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
- * Created by 一非 on 2018/5/3.
+ * Created by 一非 on 2018/5/7.
  */
 
-public class EscortAdapter extends RecyclerView.Adapter<EscortAdapter.MyViewHolder> {
+public class CarAdapter extends RecyclerView.Adapter<CarAdapter.MyViewHolder> {
 
-    private List<Escort> dataList;
+    private List<Car> dataList;
 
     private LayoutInflater layoutInflater;
 
-    public EscortAdapter(Context context, List<Escort> dataList) {
+    public CarAdapter(Context context, List<Car> dataList) {
         this.dataList = dataList;
         layoutInflater = LayoutInflater.from(context);
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = layoutInflater.inflate(R.layout.item_escort, parent, false);
+        View itemView = layoutInflater.inflate(R.layout.item_car, parent, false);
         return new MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        Escort escort = dataList.get(position);
-        holder.tvEscort.setText(escort.getEsname());
+        Car car = dataList.get(position);
+        holder.tvCar.setText(car.getPlateno());
         Glide.with(layoutInflater.getContext())
-                .load(escort.getPhotoUrl())
-                .into(holder.civEscortPhoto);
+                .load(car.getCarphoto())
+                .into(holder.civCarPhoto);
     }
 
-    public void setDataList(List<Escort> escortList) {
+    public void setDataList(List<Car> escortList) {
         this.dataList = escortList;
     }
 
-    public List<Escort> getDataList() {
+    public List<Car> getDataList() {
         return dataList;
     }
 
@@ -63,10 +63,10 @@ public class EscortAdapter extends RecyclerView.Adapter<EscortAdapter.MyViewHold
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.civ_escort_photo)
-        CircleImageView civEscortPhoto;
-        @BindView(R.id.tv_escort)
-        TextView tvEscort;
+        @BindView(R.id.civ_car_photo)
+        CircleImageView civCarPhoto;
+        @BindView(R.id.tv_car)
+        TextView tvCar;
 
         MyViewHolder(View itemView) {
             super(itemView);
@@ -75,3 +75,4 @@ public class EscortAdapter extends RecyclerView.Adapter<EscortAdapter.MyViewHold
     }
 
 }
+

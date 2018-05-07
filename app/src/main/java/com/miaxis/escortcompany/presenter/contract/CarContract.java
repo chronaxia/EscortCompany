@@ -16,10 +16,13 @@ public interface CarContract {
         void loadCarFailed(String message);
         void downCarSuccess(Company company);
         void downCarFailed(String message, Company company);
+        void deleteCarSuccess();
+        void deleteCarFailed(String message);
     }
 
     interface Presenter extends IBasePresenter {
         void downCar(Company company);
         void loadCar(Company company);
+        void deleteCar(Car car);
     }
 }

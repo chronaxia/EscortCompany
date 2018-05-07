@@ -16,10 +16,13 @@ public interface EscortContract {
         void loadEscortFailed(String message);
         void downEscortSuccess(Company company);
         void downEscortFailed(String message, Company company);
+        void deleteEscortSuccess();
+        void deleteEscortFailed(String message);
     }
 
     interface Presenter extends IBasePresenter {
         void downEscort(Company company);
         void loadEscort(Company company);
+        void deleteEscort(Escort escort);
     }
 }

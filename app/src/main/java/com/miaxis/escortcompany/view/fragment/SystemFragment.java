@@ -7,13 +7,19 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.miaxis.escortcompany.R;
 import com.miaxis.escortcompany.app.EscortCompanyApp;
 import com.miaxis.escortcompany.model.entity.Config;
 import com.miaxis.escortcompany.util.StaticVariable;
 
+import butterknife.BindView;
+
 public class SystemFragment extends BaseFragment {
+
+    @BindView(R.id.tv_username_name)
+    TextView tvUsername;
 
     private OnFragmentInteractionListener mListener;
 
@@ -38,6 +44,7 @@ public class SystemFragment extends BaseFragment {
     @Override
     protected void initView() {
         Config config = (Config) EscortCompanyApp.getInstance().get(StaticVariable.CONFIG);
+        tvUsername.setText(config.getUsername());
     }
 
     @Override

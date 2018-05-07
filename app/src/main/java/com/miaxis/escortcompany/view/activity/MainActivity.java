@@ -19,6 +19,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import es.dmoral.toasty.Toasty;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 
@@ -43,6 +45,8 @@ public class MainActivity extends BaseActivity implements EscortFragment.OnFragm
     TabLayout tlMain;
     @BindView(R.id.tv_company_select)
     TextView tvCompanySelect;
+    @BindView(R.id.ib_add)
+    ImageButton ibAdd;
 
     private MainFragmentAdapter adapter;
 
@@ -122,11 +126,26 @@ public class MainActivity extends BaseActivity implements EscortFragment.OnFragm
                 selcectCompany = companyAdapter.getDataList().get(position);
                 tvCompanySelect.setText(baseCompanyName + " ➧ " + selcectCompany.getCompname());
                 escortFragment.downEscort(selcectCompany);
+                carFragment.downCar(selcectCompany);
                 materialDialog.dismiss();
             }
         });
         baseCompanyName = companyList.get(0).getCompname();
         tvCompanySelect.setText(baseCompanyName);
+        RxView.clicks(ibAdd)
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .compose(this.bindToLifecycle())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(Object o) throws Exception {
+                        if (tlMain.getSelectedTabPosition() == 0) {
+                            escortFragment.addEscort();
+                        } else if (tlMain.getSelectedTabPosition() == 1) {
+                            carFragment.addCar();
+                        }
+                    }
+                });
     }
 
     private void initTabLayout() {

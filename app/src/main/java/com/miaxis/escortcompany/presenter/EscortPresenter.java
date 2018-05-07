@@ -48,7 +48,7 @@ public class EscortPresenter extends BaseFragmentPresenter implements EscortCont
         Observable.create(new ObservableOnSubscribe<Config>() {
             @Override
             public void subscribe(ObservableEmitter<Config> e) throws Exception {
-                e.onNext(EscortCompanyApp.getInstance().getDaoSession().getConfigDao().load(1L));
+                e.onNext((Config) EscortCompanyApp.getInstance().get(StaticVariable.CONFIG));
             }
         })
                 .subscribeOn(Schedulers.io())
@@ -119,6 +119,57 @@ public class EscortPresenter extends BaseFragmentPresenter implements EscortCont
                     public void accept(Throwable throwable) throws Exception {
                         if (view != null) {
                             view.loadEscortFailed(throwable.getMessage());
+                        }
+                    }
+                });
+    }
+
+    @Override
+    public void deleteEscort(final Escort escort) {
+        Observable.create(new ObservableOnSubscribe<Config>() {
+            @Override
+            public void subscribe(ObservableEmitter<Config> e) throws Exception {
+                e.onNext((Config) EscortCompanyApp.getInstance().get(StaticVariable.CONFIG));
+            }
+        })
+                .subscribeOn(Schedulers.io())
+                .compose(getProvider().<Config>bindToLifecycle())
+                .observeOn(Schedulers.io())
+                .flatMap(new Function<Config, ObservableSource<ResponseEntity>>() {
+                    @Override
+                    public ObservableSource<ResponseEntity> apply(Config config) throws Exception {
+                        Retrofit retrofit = new Retrofit.Builder()
+                                .addConverterFactory(GsonConverterFactory.create())//请求的结果转为实体类
+                                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())  //适配RxJava2.0, RxJava1.x则为RxJavaCallAdapterFactory.create()
+                                .baseUrl("http://" + config.getIp() + ":" + config.getPort())
+                                .build();
+                        EscortNet escortNet = retrofit.create(EscortNet.class);
+                        return escortNet.delEscort(escort.getEscode(), config.getUsername());
+                    }
+                })
+                .doOnNext(new Consumer<ResponseEntity>() {
+                    @Override
+                    public void accept(ResponseEntity responseEntity) throws Exception {
+                        if (StaticVariable.SUCCESS.equals(responseEntity.getCode())) {
+                            model.deleteEscort(escort);
+                        } else {
+                            throw new Exception(responseEntity.getMessage());
+                        }
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<ResponseEntity>() {
+                    @Override
+                    public void accept(ResponseEntity responseEntity) throws Exception {
+                        if (view != null) {
+                            view.deleteEscortSuccess();
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        if (view != null) {
+                            view.deleteEscortFailed(throwable.getMessage());
                         }
                     }
                 });

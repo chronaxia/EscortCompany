@@ -13,4 +13,8 @@ import retrofit2.http.Query;
 public interface EscortNet {
     @GET("yygl/api/downEscortByCompId")
     Observable<ResponseEntity<Escort>> downEscortByCompId(@Query("compId") Integer compId, @Query("sjc") String sjc);
+    @GET("yygl/api/delEscort")
+    Observable<ResponseEntity> delEscort(@Query("escortno") String escortno, @Query("opUser") String opUser);
+    @GET("yygl/api/addEscort")
+    Observable<ResponseEntity> addEscort(@Query("jsonEscorter") String jsonEscorter);
 }

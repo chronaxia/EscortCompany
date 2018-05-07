@@ -6,6 +6,8 @@ import com.miaxis.escortcompany.app.EscortCompanyApp;
 import com.miaxis.escortcompany.model.entity.Company;
 import com.miaxis.escortcompany.model.entity.Escort;
 import com.miaxis.escortcompany.model.local.greenDao.gen.EscortDao;
+import com.miaxis.escortcompany.util.DateUtil;
+import com.miaxis.escortcompany.util.StaticVariable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +39,12 @@ public class EscortModel {
         return EscortCompanyApp.getInstance().getDaoSession().getEscortDao().queryBuilder()
                 .where(EscortDao.Properties.Comid.eq(company.getId()))
                 .where(EscortDao.Properties.Esstatus.eq(0)).list();
+    }
+
+    public void deleteEscort(Escort escort) {
+        escort.setEsstatus(2);
+        escort.setOpdate(DateUtil.getCurDateTime24());
+        EscortCompanyApp.getInstance().getDaoSession().getEscortDao().update(escort);
     }
 
 }

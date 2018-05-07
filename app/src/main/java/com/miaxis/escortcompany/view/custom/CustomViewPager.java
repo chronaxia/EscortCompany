@@ -25,6 +25,12 @@ public class CustomViewPager extends ViewPager {
     }
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        return isSlide;
+        return isSlide && super.onInterceptTouchEvent(ev);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent ev) {
+        return isSlide && super.onTouchEvent(ev);
+
     }
 }

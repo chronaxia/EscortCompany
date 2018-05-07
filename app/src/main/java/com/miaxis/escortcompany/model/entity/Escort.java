@@ -17,7 +17,7 @@ public class Escort {
 	private String comno;
 	private String compname;
 	private String phoneno;
-	private byte[] photo;
+	private String photoUrl;
 	private String opuser;
 	private String opdate;
 	private String remark;
@@ -25,10 +25,10 @@ public class Escort {
 	private String opusername;
 	private String isCollect;
 	private String password;
-	@Generated(hash = 984396528)
+	@Generated(hash = 1779028569)
 	public Escort(String finger0, String finger1, Integer id, String escode,
 			String esname, String idcard, Integer esstatus, String comno, String compname,
-			String phoneno, byte[] photo, String opuser, String opdate, String remark,
+			String phoneno, String photoUrl, String opuser, String opdate, String remark,
 			String comid, String opusername, String isCollect, String password) {
 		this.finger0 = finger0;
 		this.finger1 = finger1;
@@ -40,7 +40,7 @@ public class Escort {
 		this.comno = comno;
 		this.compname = compname;
 		this.phoneno = phoneno;
-		this.photo = photo;
+		this.photoUrl = photoUrl;
 		this.opuser = opuser;
 		this.opdate = opdate;
 		this.remark = remark;
@@ -112,11 +112,11 @@ public class Escort {
 	public void setPhoneno(String phoneno) {
 		this.phoneno = phoneno;
 	}
-	public byte[] getPhoto() {
-		return this.photo;
+	public String getPhotoUrl() {
+		return this.photoUrl;
 	}
-	public void setPhoto(byte[] photo) {
-		this.photo = photo;
+	public void setPhotoUrl(String photoUrl) {
+		this.photoUrl = photoUrl;
 	}
 	public String getOpuser() {
 		return this.opuser;
@@ -160,4 +160,5 @@ public class Escort {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
 }

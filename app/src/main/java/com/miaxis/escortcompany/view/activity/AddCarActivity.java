@@ -24,9 +24,11 @@ import com.miaxis.escortcompany.R;
 import com.miaxis.escortcompany.app.EscortCompanyApp;
 import com.miaxis.escortcompany.model.entity.Car;
 import com.miaxis.escortcompany.model.entity.Company;
+import com.miaxis.escortcompany.model.entity.Config;
 import com.miaxis.escortcompany.presenter.AddCarPresenter;
 import com.miaxis.escortcompany.presenter.contract.AddCarContract;
 import com.miaxis.escortcompany.util.DateUtil;
+import com.miaxis.escortcompany.util.StaticVariable;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -112,6 +114,7 @@ public class AddCarActivity extends BaseActivity implements AddCarContract.View{
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(Object o) throws Exception {
+                        Config config = (Config) EscortCompanyApp.getInstance().get(StaticVariable.CONFIG);
                         Car car = new Car();
                         car.setCarcode(getResources().getString(R.string.car_code) + etCarCode.getText().toString());
                         car.setPlateno(etCarPlate.getText().toString());
@@ -120,6 +123,7 @@ public class AddCarActivity extends BaseActivity implements AddCarContract.View{
                         car.setCompname(company.getCompname());
                         car.setCompno(company.getCompno());
                         car.setOpdate(DateUtil.getCurDateTime24());
+                        car.setOpuser(config.getUsername());
                         presenter.addCar(car, path);
                     }
                 });

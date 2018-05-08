@@ -3,6 +3,7 @@ package com.miaxis.escortcompany.model.entity;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.OrderBy;
 
 @Entity
 public class Escort {

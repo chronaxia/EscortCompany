@@ -139,6 +139,9 @@ public class MainActivity extends BaseActivity implements EscortFragment.OnFragm
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(Object o) throws Exception {
+                        if (selcectCompany == null) {
+                            return;
+                        }
                         if (tlMain.getSelectedTabPosition() == 0) {
                             escortFragment.addEscort();
                         } else if (tlMain.getSelectedTabPosition() == 1) {
